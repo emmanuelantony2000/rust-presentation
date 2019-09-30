@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/white.css">
     <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="lib/css/monokai.css">
+    <link rel="stylesheet" href="lib/css/code_styles/atelier-dune-light.css">
     <!-- Printing and PDF exports -->
     <script>
-        var link = document.createElement('link');
+    var link = document.createElement('link');
     link.rel = 'stylesheet';
     link.type = 'text/css';
     link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
@@ -71,18 +71,36 @@
                     Using Ownership and Borrowing Rust can predict which variables to drop and if anything will be double freed. If there is any problem a Rust program simply won't compile. So if your Rust code compiles you are fully sure that your code has no dangling pointers, double free or any other memory leaks.
                 </section>
             </section>
-            <section data-markdown>
-                <h1>Hello World!</h1>
-                A very simple hello world program.
-            </section>
-            <section data-markdown>
-                <script type="text/template">
-                    # Markdown Support
-                    Hello how are you doin, I hope you are fine.
-                    ```rust
-                    let x = hello;
-                    ```
-            	</script>
+            <section>
+                <section>
+                    <h1>Hello World!</h1>
+                    A very simple "Hello World!" program.
+                    <pre><code class="rust" data-trim data-line-numbers data-noescape>
+fn main() {
+	println!("Hello World!");
+}
+                </code></pre>
+                </section>
+                <section>
+                    <h2>After expansion</h2>
+                    <pre><code class="rust" data-trim data-line-numbers data-noescape>
+#![feature(prelude_import)]
+#[prelude_import]
+use std::prelude::v1::*;
+#[macro_use]
+extern crate std;
+fn main() {
+    {
+        ::std::io::_print(::core::fmt::Arguments::new_v1(
+            &["Hello World!\n"],
+            &match () {
+                () => [],
+            },
+        ));
+    };
+}
+                </code></pre>
+                </section>
             </section>
             <section>
                 <section>
@@ -93,7 +111,6 @@
                 <section data-background-iframe="https://diesel.rs" data-background-interactive></section>
                 <section data-background-iframe="https://hyper.rs" data-background-interactive></section>
                 <section data-background-iframe="https://jwilm.io/blog/announcing-alacritty/" data-background-interactive></section>
-                <section data-background-iframe="https://linkerd.io" data-background-interactive></section>
                 <section data-background="images/production.png"></section>
             </section>
             <section>Slide 3</section>
@@ -116,8 +133,8 @@
             { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
             { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
             { src: 'plugin/notes/notes.js', async: true },
-            { src: 'plugin/highlight/highlight.js', async: true },
-            { src: 'plugin/notes/notes.js', async: true }
+            { src: 'plugin/highlight/highlight.js', callback: function() { hljs.initHighlightingOnLoad(); }, async: true },
+            { src: 'plugin/notes/notes.js', async: true },
         ]
     });
     </script>
