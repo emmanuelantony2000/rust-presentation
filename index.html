@@ -29,9 +29,7 @@
             <section>
                 <h1>Rust</h1>
             </section>
-            <section>
-                <img src="images/meme.jpg">
-            </section>
+            <section data-background="images/meme.jpg"></section>
             <section>
                 <section>
                     <h1>Types of languages</h1>
@@ -69,6 +67,9 @@
                     </ol>
                     <p>Borrowing is accessing the value without taking ownership.</p>
                 </section>
+                <section>
+                    Using Ownership and Borrowing Rust can predict which variables to drop and if anything will be double freed. If there is any problem a Rust program simply won't compile. So if your Rust code compiles you are fully sure that your code has no dangling pointers, double free or any other memory leaks.
+                </section>
             </section>
             <section data-markdown>
                 <script type="text/template">
@@ -80,10 +81,20 @@
             	</script>
             </section>
             <section>
-                <section>Slide 3</section>
-                <section>Slide 3.1</section>
-                <section>Slide 3.2</section>
+                <section>
+                    <h1>Rust in Production</h1>
+                </section>
+                <section data-background-iframe="https://rocket.rs/" data-background-interactive></section>
+                <section data-background-iframe="https://clap.rs/" data-background-interactive></section>
+                <section data-background-iframe="https://diesel.rs" data-background-interactive></section>
+                <section data-background-iframe="https://hyper.rs" data-background-interactive></section>
+                <section data-background-iframe="https://jwilm.io/blog/announcing-alacritty/" data-background-interactive></section>
+                <section data-background-iframe="https://linkerd.io" data-background-interactive></section>
+                <section data-background="images/production.png"></section>
             </section>
+            <section>Slide 3</section>
+            <section>Slide 3.1</section>
+            <section>Slide 3.2</section>
         </div>
     </div>
     <script src="js/reveal.js"></script>
