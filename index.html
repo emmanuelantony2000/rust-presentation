@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/theme/white.css">
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/monokai.css">
     <!-- Printing and PDF exports -->
@@ -26,8 +26,50 @@
 <body>
     <div class="reveal">
         <div class="slides">
-            <section>Slide 1</section>
-            <section>Slide 2</section>
+            <section>
+                <h1>Rust</h1>
+            </section>
+            <section>
+                <img src="images/meme.jpg">
+            </section>
+            <section>
+                <section>
+                    <h1>Types of languages</h1>
+                </section>
+                <section>
+                    <h2>Garbage collected</h2>
+                    <ul>
+                        <li>A garbage collector runs along with the main program.</li>
+                        <li>Time of execution is not predictable.</li>
+                        <li>Highly memory safe and efficient.</li>
+                        <li>Java, Python, Go</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Non Garbage collected</h2>
+                    <ul>
+                        <li>Just a runtime while the program runs. The program can even run without a runtime on bare metal.</li>
+                        <li>Time of the execution is predictable.</li>
+                        <li>Very less memory safety and manual memory management required.</li>
+                        <li>C, C++</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Enter Rust</h1>
+                </section>
+                <section>
+                    <h2>Ownership and Borrowing</h2>
+                    <p>Ownership rules:</p>
+                    <ol>
+                        <li>Each value in Rust has a variable that’s called its owner.</li>
+                        <li>There can only be one owner at a time.</li>
+                        <li>When the owner goes out of scope, the value will be dropped.</li>
+                    </ol>
+                    <p>Borrowing is accessing the value without taking ownership.</p>
+                </section>
+            </section>
             <section data-markdown>
                 <script type="text/template">
                     # Markdown Support
@@ -54,6 +96,7 @@
         progress: true,
         center: true,
         hash: true,
+        transition: 'slide',
         dependencies: [
             { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
             { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
