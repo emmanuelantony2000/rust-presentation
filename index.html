@@ -10,9 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/white.css">
+    <link rel="stylesheet" href="css/theme/black.css">
     <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="lib/css/code_styles/atelier-dune-light.css">
+    <link rel="stylesheet" href="lib/css/code_styles/atelier-dune-dark.css">
     <!-- Printing and PDF exports -->
     <script>
     var link = document.createElement('link');
@@ -101,6 +101,29 @@ fn main() {
 }
                 </code></pre>
                 </section>
+                <section>
+                    <h2>Zero Cost Abstraction</h2>
+                    <ol>
+                        <li>What we don't use, we don't pay for.</li>
+                        <li>What we do use, we couldn't hand code any better.</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>Both of these code will have the same speed.</h2>
+                    <pre><code class="rust" data-trim data-line-numbers data-noescape>
+struct Sample {
+    x: u32,
+}
+let t = Sample { x: 3 };
+                    </code></pre>
+                    <!-- Rust will do the necessary optimizations to make both of these code run at the same speed. -->
+                    <pre><code class="rust" data-trim data-line-numbers data-noescape>
+let t: u32 = 3;
+                    </code></pre>
+                </section>
+                <section>
+                    Asynchronous programming didn't come till yet in stable Rust because of this reason. Previously Rust had a GC then they left all it for a core belief in "Zero Cost abstraction". Currently, the version of stable Rust is 1.38 and async and await are going to be stabilized at the next update.
+                </section>
             </section>
             <section>
                 <section>
@@ -113,9 +136,9 @@ fn main() {
                 <section data-background-iframe="https://jwilm.io/blog/announcing-alacritty/" data-background-interactive></section>
                 <section data-background="images/production.png"></section>
             </section>
-            <section>Slide 3</section>
-            <section>Slide 3.1</section>
-            <section>Slide 3.2</section>
+            <section>
+                <h1>Thank You!</h1>
+            </section>
         </div>
     </div>
     <script src="js/reveal.js"></script>
