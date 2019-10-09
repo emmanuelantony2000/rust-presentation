@@ -173,7 +173,7 @@ fn add(a: u32, b: u32) -&gt; &amp;u32 {
                     A very simple "Hello World!" program.
                     <pre><code class="rust" data-trim data-line-numbers data-noescape>
 fn main() {
-	println!(&quot;Hello World!&quot;);
+    println!(&quot;Hello World!&quot;);
 }
                 </code></pre>
                 </section>
@@ -265,7 +265,14 @@ let t: Vec&lt;u32&gt; = vec![3];
             { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
             { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
             { src: 'plugin/notes/notes.js', async: true },
-            { src: 'plugin/highlight/highlight.js', callback: function() { hljs.initHighlightingOnLoad(); }, async: true },
+            {
+                src: 'plugin/highlight/highlight.js',
+                callback: function() {
+                    hljs.configure({ useBR: false });
+                    hljs.initHighlightingOnLoad();
+                },
+                async: true
+            },
             { src: 'plugin/notes/notes.js', async: true },
         ]
     });
