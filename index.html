@@ -10,9 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/theme/white.css">
     <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="lib/css/code_styles/atelier-dune-dark.css">
+    <link rel="stylesheet" href="lib/css/code_styles/atelier-dune-light.css">
     <!-- Printing and PDF exports -->
     <script>
     var link = document.createElement('link');
@@ -70,6 +70,93 @@
                 <section>
                     Using Ownership and Borrowing Rust can predict which variables to drop and if anything will be double freed. If there is any problem a Rust program simply won't compile. So if your Rust code compiles you are fully sure that your code has no dangling pointers, double free or any other memory leaks.
                 </section>
+                <section>
+                    Rust also has a concept of immutable and mutable variables. Unless specified a variable will be declared as immutable. Even borrows (references) can be immutable or mutable. A mutable borrow means, that the variable which has borrowed some value from a mutable variable has the permission to change it. A variable can have only one mutable borrow or any number of immutable borrows. This helps to prevent data races at compile time.
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Examples</h1>
+                </section>
+                <section>
+                    <pre><code class="rust" data-trim data-line-numbers data-noescape>
+fn main() {
+    let a = String::from("Hello World!");
+    // 'a' is the owner of this string
+    let b = a;
+    // Ownership of the string is transfered to 'b'
+    println!("{}", a);
+    // ERROR, a no longer has access to any value
+    println!("{}", b);
+    // This will work just fine
+}
+// 'b' being the owner of the string,
+// the string from the memory will be dropped
+// As 'a' owns nothing, nothing will be dropped,
+// hence preventing double free
+                </code></pre>
+                </section>
+                <section>
+                    <pre><code class="rust" data-trim data-line-numbers data-noescape>
+fn main() {
+    let a = String::from("Hello World!");
+    // 'a' is the owner of this string
+    let b = &amp;a;
+    // 'b' has borrowed the value of 'a'
+    println!("{}", a);
+    println!("{}", b);
+    // Both of these will work just fine
+}
+// 'a' being the owner of the string,
+// the string from the memory will be dropped
+// As 'b' had borrowed a value, nothing will be dropped,
+// hence preventing double free
+                </code></pre>
+                </section>
+                <section>
+                    <pre><code class="rust" data-trim data-line-numbers data-noescape>
+fn main() {
+    let a = String::from("Hello World!");
+    // 'a' is the owner of this string
+    println!("{}", a);
+    a = String::from("Hello there!");
+    // Not allowed, 'a' is immutable
+}
+                </code></pre>
+                </section>
+                <section>
+                    <pre><code class="rust" data-trim data-line-numbers data-noescape>
+fn main() {
+    let mut a = String::from("Hello World!");
+    // 'a' is the owner of this string
+    println!("{}", a);
+    a = String::from("Hello there!");
+    // Allowed, 'a' is mutable
+    println!("{}", a);
+}
+                </code></pre>
+                </section>
+                <section>
+                    <pre><code class="rust" data-trim data-line-numbers data-noescape>
+fn main() {
+    let a = String::from("Hello World!");
+    // 'a' contains the string
+    println!("{}", a);
+    // Will work as expected
+    let a = 3;
+    // The string value is dropped for an integer value
+    // The string value is no longer accessible
+    // Process is known as variable shadowing
+    println!("{}", a);
+}
+                </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Some more examples</h1>
+                </section>
+                <section data-background-iframe="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20a%20%3D%20String%3A%3Afrom(%22hello%22)%3B%0A%20%20%20%20let%20b%20%3D%20%26mut%20a%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20b)%3B%0A%20%20%20%20%2F%2F%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D" data-background-interactive></section>
             </section>
             <section>
                 <section>
@@ -110,19 +197,31 @@ fn main() {
                 </section>
                 <section>
                     <h2>Both of these code will have the same speed.</h2>
+                </section>
+                <section>
                     <pre><code class="rust" data-trim data-line-numbers data-noescape>
 struct Sample {
     x: u32,
 }
 let t = Sample { x: 3 };
                     </code></pre>
-                    <!-- Rust will do the necessary optimizations to make both of these code run at the same speed. -->
                     <pre><code class="rust" data-trim data-line-numbers data-noescape>
 let t: u32 = 3;
                     </code></pre>
                 </section>
                 <section>
-                    Asynchronous programming didn't come till yet in stable Rust because of this reason. Previously Rust had a GC then they left all it for a core belief in "Zero Cost abstraction". Currently, the version of stable Rust is 1.38 and async and await are going to be stabilized at the next update.
+                    <pre><code class="rust" data-trim data-line-numbers data-noescape>
+struct Sample {
+    x: Vec&lt;u32&gt;,
+}
+let t = Sample { x: vec![3] };
+                    </code></pre>
+                    <pre><code class="rust" data-trim data-line-numbers data-noescape>
+let t: Vec&lt;u32&gt; = vec![3];
+                    </code></pre>
+                </section>
+                <section>
+                    Asynchronous programming (async and await) didn't come till yet in stable Rust because of this reason. Previously Rust had a GC then they left all it for a core belief in "Zero Cost abstraction". Currently, the version of stable Rust is 1.38 and async and await are going to be stabilized at the next update.
                 </section>
             </section>
             <section>
@@ -136,6 +235,7 @@ let t: u32 = 3;
                 <section data-background-iframe="https://jwilm.io/blog/announcing-alacritty/" data-background-interactive></section>
                 <section data-background="images/production.png"></section>
             </section>
+            <section data-background="images/meme.jpg"></section>
             <section>
                 <h1>Thank You!</h1>
             </section>
