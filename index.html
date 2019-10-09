@@ -82,45 +82,45 @@
                     <pre><code class="rust" data-trim data-line-numbers data-noescape>
 fn main() {
     let a = String::from("Hello World!");
-    // 'a' is the owner of this string
+    // 'a' is the owner of this string //
     let b = a;
-    // Ownership of the string is transfered to 'b'
+    // Ownership of the string is transfered to 'b' //
     println!("{}", a);
-    // ERROR, a no longer has access to any value
+    // ERROR, a no longer has access to any value //
     println!("{}", b);
-    // This will work just fine
+    // This will work just fine //
 }
-// 'b' being the owner of the string,
-// the string from the memory will be dropped
-// As 'a' owns nothing, nothing will be dropped,
-// hence preventing double free
+// 'b' being the owner of the string, //
+// the string from the memory will be dropped //
+// As 'a' owns nothing, nothing will be dropped, //
+// hence preventing double free //
                 </code></pre>
                 </section>
                 <section>
                     <pre><code class="rust" data-trim data-line-numbers data-noescape>
 fn main() {
     let a = String::from("Hello World!");
-    // 'a' is the owner of this string
+    // 'a' is the owner of this string //
     let b = &amp;a;
-    // 'b' has borrowed the value of 'a'
+    // 'b' has borrowed the value of 'a' //
     println!("{}", a);
     println!("{}", b);
-    // Both of these will work just fine
+    // Both of these will work just fine //
 }
-// 'a' being the owner of the string,
-// the string from the memory will be dropped
-// As 'b' had borrowed a value, nothing will be dropped,
-// hence preventing double free
+// 'a' being the owner of the string, //
+// the string from the memory will be dropped //
+// As 'b' had borrowed a value, nothing will be dropped, //
+// hence preventing double free //
                 </code></pre>
                 </section>
                 <section>
                     <pre><code class="rust" data-trim data-line-numbers data-noescape>
 fn main() {
     let a = String::from("Hello World!");
-    // 'a' is the owner of this string
+    // 'a' is the owner of this string //
     println!("{}", a);
     a = String::from("Hello there!");
-    // Not allowed, 'a' is immutable
+    // Not allowed, 'a' is immutable //
 }
                 </code></pre>
                 </section>
@@ -128,10 +128,10 @@ fn main() {
                     <pre><code class="rust" data-trim data-line-numbers data-noescape>
 fn main() {
     let mut a = String::from("Hello World!");
-    // 'a' is the owner of this string
+    // 'a' is the owner of this string //
     println!("{}", a);
     a = String::from("Hello there!");
-    // Allowed, 'a' is mutable
+    // Allowed, 'a' is mutable //
     println!("{}", a);
 }
                 </code></pre>
@@ -140,14 +140,23 @@ fn main() {
                     <pre><code class="rust" data-trim data-line-numbers data-noescape>
 fn main() {
     let a = String::from("Hello World!");
-    // 'a' contains the string
+    // 'a' contains the string //
     println!("{}", a);
-    // Will work as expected
+    // Will work as expected //
     let a = 3;
-    // The string value is dropped for an integer value
-    // The string value is no longer accessible
-    // Process is known as variable shadowing
+    // The string value is dropped for an integer value //
+    // The string value is no longer accessible //
+    // Process is known as variable shadowing //
     println!("{}", a);
+}
+                </code></pre>
+                </section>
+                <section>
+                    <pre><code class="rust" data-trim data-line-numbers data-noescape>
+fn add(a: u32, b: u32) -&gt; &amp;u32 {
+    let c: u32 = a + b;
+    &amp;c
+    // Not allowed //
 }
                 </code></pre>
                 </section>
