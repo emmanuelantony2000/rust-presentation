@@ -82,45 +82,45 @@
                     <pre><code class="rust" data-trim data-line-numbers data-noescape>
 fn main() {
     let a = String::from(&quot;Hello World!&quot;);
-    // &apos;a&apos; is the owner of this string
+    /* &apos;a&apos; is the owner of this string */
     let b = a;
-    // Ownership of the string is transfered to &apos;b&apos;
+    /* Ownership of the string is transfered to &apos;b&apos; */
     println!(&quot;{}&quot;, a);
-    // ERROR, a no longer has access to any value
+    /* ERROR, a no longer has access to any value */
     println!(&quot;{}&quot;, b);
-    // This will work just fine
+    /* This will work just fine */
 }
-// &apos;b&apos; being the owner of the string,
-// the string from the memory will be dropped
-// As &apos;a&apos; owns nothing, nothing will be dropped,
-// hence preventing double free
+/* &apos;b&apos; being the owner of the string, */
+/* the string from the memory will be dropped */
+/* As &apos;a&apos; owns nothing, nothing will be dropped, */
+/* hence preventing double free */
                 </code></pre>
                 </section>
                 <section>
                     <pre><code class="rust" data-trim data-line-numbers data-noescape>
 fn main() {
     let a = String::from(&quot;Hello World!&quot;);
-    // &apos;a&apos; is the owner of this string
+    /* &apos;a&apos; is the owner of this string */
     let b = &amp;a;
-    // &apos;b&apos; has borrowed the value of &apos;a&apos;
+    /* &apos;b&apos; has borrowed the value of &apos;a&apos; */
     println!(&quot;{}&quot;, a);
     println!(&quot;{}&quot;, b);
-    // Both of these will work just fine
+    /* Both of these will work just fine */
 }
-// &apos;a&apos; being the owner of the string,
-// the string from the memory will be dropped
-// As &apos;b&apos; had borrowed a value, nothing will be dropped,
-// hence preventing double free
+/* &apos;a&apos; being the owner of the string, */
+/* the string from the memory will be dropped */
+/* As &apos;b&apos; had borrowed a value, nothing will be dropped, */
+/* hence preventing double free */
                 </code></pre>
                 </section>
                 <section>
                     <pre><code class="rust" data-trim data-line-numbers data-noescape>
 fn main() {
     let a = String::from(&quot;Hello World!&quot;);
-    // &apos;a&apos; is the owner of this string
+    /* &apos;a&apos; is the owner of this string */
     println!(&quot;{}&quot;, a);
     a = String::from(&quot;Hello there!&quot;);
-    // Not allowed, &apos;a&apos; is immutable
+    /* Not allowed, &apos;a&apos; is immutable */
 }
                 </code></pre>
                 </section>
@@ -128,10 +128,10 @@ fn main() {
                     <pre><code class="rust" data-trim data-line-numbers data-noescape>
 fn main() {
     let mut a = String::from(&quot;Hello World!&quot;);
-    // &apos;a&apos; is the owner of this string
+    /* &apos;a&apos; is the owner of this string */
     println!(&quot;{}&quot;, a);
     a = String::from(&quot;Hello there!&quot;);
-    // Allowed, &apos;a&apos; is mutable
+    /* Allowed, &apos;a&apos; is mutable */
     println!(&quot;{}&quot;, a);
 }
                 </code></pre>
@@ -140,13 +140,13 @@ fn main() {
                     <pre><code class="rust" data-trim data-line-numbers data-noescape>
 fn main() {
     let a = String::from(&quot;Hello World!&quot;);
-    // &apos;a&apos; contains the string
+    /* &apos;a&apos; contains the string */
     println!(&quot;{}&quot;, a);
-    // Will work as expected
+    /* Will work as expected */
     let a = 3;
-    // The string value is dropped for an integer value
-    // The string value is no longer accessible
-    // Process is known as variable shadowing
+    /* The string value is dropped for an integer value */
+    /* The string value is no longer accessible */
+    /* Process is known as variable shadowing */
     println!(&quot;{}&quot;, a);
 }
                 </code></pre>
@@ -156,7 +156,7 @@ fn main() {
 fn add(a: u32, b: u32) -&gt; &amp;u32 {
     let c: u32 = a + b;
     &amp;c
-    // Not allowed
+    /* Not allowed */
 }
                 </code></pre>
                 </section>
